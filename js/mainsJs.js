@@ -18,20 +18,32 @@ function initWorld(){
 
 	scene.add(pointLight);
 
+
   var loader = new THREE.JSONLoader();
+  /*
   // IMPORTANDO DO BLENDER
 
-  loader.load('json/algo.json', function(geometry, materials){
-     algo = new THREE.Mesh(geometry, materials);
+  loader.load('json/sphere.json', function(geometry, materials){
+
+
+    algo = new THREE.Mesh(geometry, materials);
     scene.add(algo);
     algo.scale.set(80,80,80);
     camera.lookAt(algo.position);
   });
+  */
 
+  var worldGeo = new THREE.SphereGeometry(100,100,100);
+  var materials = new THREE.MeshLambertMaterial({map: loadTexture()});
+  var world = new THREE.Mesh(worldGeo, materials);
+  scene.add(world);
+  camera.lookAt(world.position);
 
   function render(){
     renderer.render(scene, camera);
     requestAnimationFrame(render);
+    
+    world.rotation.y +=0.01;
 
     if (algo){
       algo.rotation.y +=0.01;
@@ -40,5 +52,13 @@ function initWorld(){
   }
 
   render();
+
+  function loadTexture(){
+    var image = new THREE.ImageUtils.loadTexture('images/texture/earthTexture.jpg', {}, function(){
+      renderer.render(scene);
+    });
+    return image;
+  }
+
 
 }
