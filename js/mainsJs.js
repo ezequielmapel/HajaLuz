@@ -11,7 +11,7 @@ function initWorld(){
   document.body.appendChild(renderer.domElement);
 
   camera.position.y = height/2;
-  camera.position.z = 300;
+  camera.position.z = 500;
 
   var pointLight = new THREE.PointLight(0xFFFFFF);
 	pointLight.position.set(0,300,600);
@@ -37,13 +37,18 @@ function initWorld(){
   var materials = new THREE.MeshLambertMaterial({map: loadTexture()});
   var world = new THREE.Mesh(worldGeo, materials);
   scene.add(world);
+  world.position.y = 500;
   camera.lookAt(world.position);
+  
+  var pointLight = new THREE.PointLight(0xFFFFFF);
+  pointLight.position.set(0, 1200,600);
+  scene.add(pointLight);
 
   function render(){
     renderer.render(scene, camera);
     requestAnimationFrame(render);
     
-    world.rotation.y +=0.01;
+    world.rotation.y +=0.001;
 
     if (algo){
       algo.rotation.y +=0.01;
