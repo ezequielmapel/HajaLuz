@@ -51,18 +51,23 @@ function initWorld() {
 
 
   var pointLight = new THREE.PointLight(0xFFFFFF);
-  pointLight.position.set(0, 1200,600);
+  pointLight.position.set(0, 300,1600);
   scene.add(pointLight);
 
-  function render(){
-    renderer.render(scene, camera);
-    requestAnimationFrame(render);
-    world.rotation.y +=0.001;
-    //controls.update();
 
-    if (algo){
-      algo.rotation.y +=0.01;
-    }
+
+  function render(){
+    var clock = new THREE.Clock();
+
+    renderer.render(scene, camera);
+
+    world.rotation.y +=0.001;
+
+    requestAnimationFrame(render);
+    //world.rotation.y +=0.001;
+
+
+
 
   }
 
